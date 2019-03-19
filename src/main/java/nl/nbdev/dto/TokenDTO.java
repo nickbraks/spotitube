@@ -1,11 +1,14 @@
 package nl.nbdev.dto;
 
+import java.util.UUID;
+
 public class TokenDTO {
     private String token;
     private String user;
 
     public TokenDTO() {
-
+        this.token = "123-123-123";
+        this.user = "nick";
     }
 
     public TokenDTO(String token, String user) {

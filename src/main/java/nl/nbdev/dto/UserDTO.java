@@ -5,7 +5,8 @@ public class UserDTO {
     private String password;
 
     public UserDTO() {
-
+        this.user = "nick";
+        this.password = "test";
     }
 
     public UserDTO(String user, String password) {
@@ -13,12 +14,11 @@ public class UserDTO {
         this.password = password;
     }
 
-
-    public String getUsername() {
+    public String getUser() {
         return user;
     }
 
-    public void setUsername(String user) {
+    public void setUser(String user) {
         this.user = user;
     }
 

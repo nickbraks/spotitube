@@ -1,14 +1,14 @@
-package nl.nbdev;
+package nl.nbdev.dto;
 
-public class ErrorMessages {
+public class ErrorDTO {
     private int code;
     private String message;
 
-    public ErrorMessages() {
+    public ErrorDTO() {
 
     }
-    
-    public ErrorMessages(int code, String message) {
+
+    public ErrorDTO(int code, String message) {
         this.code = code;
         this.message = message;
     }
