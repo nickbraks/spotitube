@@ -23,11 +23,13 @@ public class PlaylistsResource {
     public Response getPlaylists(@QueryParam("token") String token) {
         if (tokenDAO.ValidateToken(token)) {
             PlaylistsDTO lists = new PlaylistsDTO();
-            lists.setPlaylists(playlistsDAO.getPlaylistsFromUser());
+            lists.setPlaylists(playlistsDAO.getPlaylistsFromUser(token));
             lists.setLength(playlistsDAO.getLengthOfPlaylist());
-            return Response.ok(lists).build();
+            return Response.ok(
+                    lists
+            ).build();
         } else {
-            ErrorDTO forbidden = new ErrorDTO(403, "403, Forbidden.");
+            ErrorDTO forbidden = new ErrorDTO("403, Forbidden.");
             return Response.status(forbidden.getCode()).entity(forbidden).build();
         }
     }
@@ -44,9 +46,8 @@ public class PlaylistsResource {
                     )
             ).build();
         } else {
-            ErrorDTO forbidden = new ErrorDTO(403, "403, Forbidden.");
+            ErrorDTO forbidden = new ErrorDTO("403, Forbidden.");
             return Response.status(forbidden.getCode()).entity(forbidden).build();
         }
-
     }
 }

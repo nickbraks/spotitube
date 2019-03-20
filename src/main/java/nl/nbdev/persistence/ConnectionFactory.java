@@ -24,7 +24,7 @@ public class ConnectionFactory {
         try {
             return DriverManager.getConnection(CONNECTION_URL, DB_USER, DB_PASSWORD);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new SpotitubePersistenceException(e);
         }
     }
 }

@@ -8,8 +8,7 @@ public class ErrorDTO {
 
     }
 
-    public ErrorDTO(int code, String message) {
-        this.code = code;
+    public ErrorDTO(String message) {
         this.message = message;
     }
 
@@ -17,15 +16,7 @@ public class ErrorDTO {
         return message;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
     public int getCode() {
         return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
     }
 }

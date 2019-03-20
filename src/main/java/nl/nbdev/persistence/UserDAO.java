@@ -29,7 +29,7 @@ public class UserDAO {
 
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new SpotitubePersistenceException(e);
         }
         return foundUser;
     }

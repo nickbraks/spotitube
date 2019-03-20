@@ -14,13 +14,16 @@ public class PlaylistsDAO {
 
     private final ConnectionFactory connectionFactory = new ConnectionFactory();
 
-    public List<PlaylistDTO> getPlaylistsFromUser() {
+    public List<PlaylistDTO> getPlaylistsFromUser(String token) {
         List<PlaylistDTO> playlists = new ArrayList<>();
 
         try (
                 Connection connection = connectionFactory.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM playlist")
+                PreparedStatement preparedStatement = connection.prepareStatement("SELECT playlistID, name, IF(" +
+                        "(SELECT token FROM token WHERE username = p.createdBy) = ?, true, false) AS owner, createdBy " +
+                        "FROM playlist p")
         ) {
+            preparedStatement.setString(1, token);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 playlists.add(
@@ -75,7 +78,8 @@ public class PlaylistsDAO {
         try (
                 Connection connection = connectionFactory.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("SELECT SUM(duration) AS totalDuration " +
-                        "FROM track INNER JOIN trackinplaylist ON track.trackID = trackinplaylist.trackID")
+                        "FROM track INNER JOIN trackinplaylist " +
+                        "ON track.trackID = trackinplaylist.trackID")
         ) {
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
